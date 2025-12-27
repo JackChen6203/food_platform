@@ -70,6 +70,40 @@ func createTables() {
 		log.Fatal("Error creating orders table:", err)
 	}
 
+	// Users Table
+	queryUsers := `
+	CREATE TABLE IF NOT EXISTS users (
+		id TEXT PRIMARY KEY,
+		email TEXT,
+		auth_provider TEXT NOT NULL,
+		auth_id TEXT NOT NULL,
+		wallet_address TEXT,
+		is_merchant BOOLEAN DEFAULT FALSE,
+		created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+		UNIQUE(auth_provider, auth_id)
+	);
+	`
+	_, err = DB.Exec(queryUsers)
+	if err != nil {
+		log.Fatal("Error creating users table:", err)
+	}
+
+	// Merchants Table
+	queryMerchants := `
+	CREATE TABLE IF NOT EXISTS merchants (
+		user_id TEXT PRIMARY KEY REFERENCES users(id),
+		shop_name TEXT,
+		address TEXT,
+		latitude DOUBLE PRECISION,
+		longitude DOUBLE PRECISION,
+		created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+	);
+	`
+	_, err = DB.Exec(queryMerchants)
+	if err != nil {
+		log.Fatal("Error creating merchants table:", err)
+	}
+
 	// Migration for existing tables (Rough way for prototype)
 	// We ignore errors here as it might fail if column exists
 	DB.Exec(`ALTER TABLE products ADD COLUMN IF NOT EXISTS merchant_id TEXT DEFAULT 'default_merchant';`)

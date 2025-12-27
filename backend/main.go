@@ -20,6 +20,10 @@ func main() {
 	r.POST("/products", handlers.CreateProduct)
 	r.POST("/purchase/:id", handlers.PurchaseProduct)
 
+	// Auth Routes
+	r.POST("/login", handlers.Login)
+	r.POST("/merchant/setup", handlers.UpdateMerchantProfile)
+
 	// Listen on PORT provided by Cloud Run, or default to 8080
 	port := os.Getenv("PORT")
 	if port == "" {
