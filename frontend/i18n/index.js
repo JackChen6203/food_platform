@@ -71,7 +71,19 @@ const resources = {
             "cat_bakery": "Bakery",
             "cat_grocery": "Grocery",
             "cat_cafe": "Café",
-            "cat_other": "Other"
+            "cat_other": "Other",
+            // FavoritesScreen
+            "favorites": "Favorites",
+            "no_favorites": "No Favorites Yet",
+            "no_favorites_desc": "Save your favorite shops to find them easily later.",
+            // NotificationsScreen
+            "notifications": "Notifications",
+            "no_notifications": "No Notifications",
+            "no_notifications_desc": "You're all caught up! Check back later.",
+            // SearchScreen
+            "search": "Search",
+            "search_placeholder": "Search shops or food...",
+            "no_results": "No Results Found"
         }
     },
     'zh-TW': {
@@ -139,7 +151,16 @@ const resources = {
             "cat_bakery": "烘焙坊",
             "cat_grocery": "雜貨店",
             "cat_cafe": "咖啡廳",
-            "cat_other": "其他"
+            "cat_other": "其他",
+            "favorites": "收藏",
+            "no_favorites": "尚無收藏",
+            "no_favorites_desc": "收藏您喜愛的店家，方便日後查找。",
+            "notifications": "通知",
+            "no_notifications": "沒有通知",
+            "no_notifications_desc": "您已看完所有通知！稍後再來查看。",
+            "search": "搜尋",
+            "search_placeholder": "搜尋店家或美食...",
+            "no_results": "找不到結果"
         }
     },
     'zh-CN': {
