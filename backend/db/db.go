@@ -116,4 +116,104 @@ func createTables() {
 	DB.Exec(`ALTER TABLE merchants ADD COLUMN IF NOT EXISTS business_hours_close TEXT;`)
 	DB.Exec(`ALTER TABLE merchants ADD COLUMN IF NOT EXISTS category TEXT;`)
 	DB.Exec(`ALTER TABLE merchants ADD COLUMN IF NOT EXISTS description TEXT;`)
+
+	// =========================================================================
+	// NEW TABLES: Reviews, Favorites, Notifications
+	// =========================================================================
+
+	// Reviews Table - Consumer ratings for merchants
+	queryReviews := `
+	CREATE TABLE IF NOT EXISTS reviews (
+		id SERIAL PRIMARY KEY,
+		order_id INT REFERENCES orders(id),
+		user_id TEXT REFERENCES users(id),
+		merchant_id TEXT REFERENCES merchants(user_id),
+		rating INT CHECK (rating >= 1 AND rating <= 5),
+		comment TEXT,
+		created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+	);
+	`
+	DB.Exec(queryReviews)
+
+	// Favorites Table - Users' favorite merchants
+	queryFavorites := `
+	CREATE TABLE IF NOT EXISTS favorites (
+		id SERIAL PRIMARY KEY,
+		user_id TEXT REFERENCES users(id),
+		merchant_id TEXT REFERENCES merchants(user_id),
+		created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+		UNIQUE(user_id, merchant_id)
+	);
+	`
+	DB.Exec(queryFavorites)
+
+	// Notifications Table - Push notifications
+	queryNotifications := `
+	CREATE TABLE IF NOT EXISTS notifications (
+		id SERIAL PRIMARY KEY,
+		user_id TEXT REFERENCES users(id),
+		title TEXT NOT NULL,
+		body TEXT,
+		type TEXT DEFAULT 'general',
+		is_read BOOLEAN DEFAULT FALSE,
+		created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+	);
+	`
+	DB.Exec(queryNotifications)
+
+	// Pickup Schedules Table - Order pickup time slots
+	queryPickupSchedules := `
+	CREATE TABLE IF NOT EXISTS pickup_schedules (
+		id SERIAL PRIMARY KEY,
+		order_id INT REFERENCES orders(id),
+		scheduled_time TIMESTAMP NOT NULL,
+		status TEXT DEFAULT 'pending',
+		created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+	);
+	`
+	DB.Exec(queryPickupSchedules)
+
+	// Promotions Table - Merchant promotions
+	queryPromotions := `
+	CREATE TABLE IF NOT EXISTS promotions (
+		id SERIAL PRIMARY KEY,
+		merchant_id TEXT REFERENCES merchants(user_id),
+		title TEXT NOT NULL,
+		description TEXT,
+		discount_percent INT,
+		start_date TIMESTAMP,
+		end_date TIMESTAMP,
+		is_active BOOLEAN DEFAULT TRUE,
+		created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+	);
+	`
+	DB.Exec(queryPromotions)
+
+	// User Points Table - Loyalty points
+	queryUserPoints := `
+	CREATE TABLE IF NOT EXISTS user_points (
+		user_id TEXT PRIMARY KEY REFERENCES users(id),
+		points INT DEFAULT 0,
+		last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+	);
+	`
+	DB.Exec(queryUserPoints)
+
+	// Point History Table - Points transactions
+	queryPointHistory := `
+	CREATE TABLE IF NOT EXISTS point_history (
+		id SERIAL PRIMARY KEY,
+		user_id TEXT REFERENCES users(id),
+		points_change INT NOT NULL,
+		reason TEXT,
+		created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+	);
+	`
+	DB.Exec(queryPointHistory)
+
+	// Add image_url column to products
+	DB.Exec(`ALTER TABLE products ADD COLUMN IF NOT EXISTS image_url TEXT;`)
+
+	// Add status column to orders
+	DB.Exec(`ALTER TABLE orders ADD COLUMN IF NOT EXISTS status TEXT DEFAULT 'pending';`)
 }
