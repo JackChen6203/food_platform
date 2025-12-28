@@ -20,6 +20,15 @@
 - [x] Description field
 - [x] Back navigation
 
+### Frontend Screens
+- [x] LoginScreen (OAuth + WalletConnect)
+- [x] HomeScreen (Product listings)
+- [x] MerchantSetupScreen (Store setup form)
+- [x] MerchantDetailScreen (Ratings, reviews, info)
+- [x] FavoritesScreen (Favorites list)
+- [x] NotificationsScreen (Read/unread notifications)
+- [x] SearchScreen (Debounced merchant search)
+
 ### Product Management
 - [x] Create product listing
 - [x] View nearby products
