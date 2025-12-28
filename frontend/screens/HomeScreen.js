@@ -173,12 +173,30 @@ export default function HomeScreen({ route, navigation }) {
                         <Ionicons name="chevron-down" size={14} color={COLORS.textSecondary} />
                     </View>
                 </View>
-                <View style={{ flexDirection: 'row' }}>
-                    <TouchableOpacity onPress={toggleRole} style={styles.iconBtn}>
-                        <MaterialCommunityIcons name={role === 'MERCHANT' ? "store" : "account"} size={24} color={COLORS.textPrimary} />
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    <TouchableOpacity
+                        onPress={() => navigation.navigate('Search', { userId: user?.user_id })}
+                        style={styles.iconBtn}
+                    >
+                        <Ionicons name="search" size={22} color={COLORS.textPrimary} />
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => navigation.replace('Login')} style={[styles.iconBtn, { marginLeft: 10 }]}>
-                        <Ionicons name="log-out-outline" size={24} color={COLORS.error} />
+                    <TouchableOpacity
+                        onPress={() => navigation.navigate('Favorites', { userId: user?.user_id })}
+                        style={styles.iconBtn}
+                    >
+                        <Ionicons name="heart-outline" size={22} color={COLORS.textPrimary} />
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => navigation.navigate('Notifications', { userId: user?.user_id })}
+                        style={styles.iconBtn}
+                    >
+                        <Ionicons name="notifications-outline" size={22} color={COLORS.textPrimary} />
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={toggleRole} style={styles.iconBtn}>
+                        <MaterialCommunityIcons name={role === 'MERCHANT' ? "store" : "account"} size={22} color={COLORS.textPrimary} />
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.replace('Login')} style={styles.iconBtn}>
+                        <Ionicons name="log-out-outline" size={22} color={COLORS.error} />
                     </TouchableOpacity>
                 </View>
             </View>
