@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginScreen from './screens/LoginScreen';
 import HomeScreen from './screens/HomeScreen';
 import MerchantSetupScreen from './screens/MerchantSetupScreen';
+import MerchantDetailScreen from './screens/MerchantDetailScreen';
 
 import './i18n'; // Initialize i18n
 
@@ -50,7 +51,8 @@ export default function App() {
                     <Stack.Navigator initialRouteName="Login">
                         <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
                         <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
-                        <Stack.Screen name="MerchantSetup" component={MerchantSetupScreen} options={{ title: 'Merchant Setup' }} />
+                        <Stack.Screen name="MerchantSetup" component={MerchantSetupScreen} options={{ headerShown: false }} />
+                        <Stack.Screen name="MerchantDetail" component={MerchantDetailScreen} options={{ headerShown: false }} />
                     </Stack.Navigator>
                 </NavigationContainer>
                 <Web3Modal />
