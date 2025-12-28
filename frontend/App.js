@@ -7,6 +7,7 @@ import MerchantSetupScreen from './screens/MerchantSetupScreen';
 import MerchantDetailScreen from './screens/MerchantDetailScreen';
 import FavoritesScreen from './screens/FavoritesScreen';
 import NotificationsScreen from './screens/NotificationsScreen';
+import SearchScreen from './screens/SearchScreen';
 
 import './i18n'; // Initialize i18n
 
@@ -57,6 +58,7 @@ export default function App() {
                         <Stack.Screen name="MerchantDetail" component={MerchantDetailScreen} options={{ headerShown: false }} />
                         <Stack.Screen name="Favorites" component={FavoritesScreen} options={{ headerShown: false }} />
                         <Stack.Screen name="Notifications" component={NotificationsScreen} options={{ headerShown: false }} />
+                        <Stack.Screen name="Search" component={SearchScreen} options={{ headerShown: false }} />
                     </Stack.Navigator>
                 </NavigationContainer>
                 <Web3Modal />
