@@ -72,11 +72,17 @@ func Login(c *gin.Context) {
 
 func UpdateMerchantProfile(c *gin.Context) {
 	var input struct {
-		UserID    string  `json:"user_id" binding:"required"`
-		ShopName  string  `json:"shop_name" binding:"required"`
-		Address   string  `json:"address" binding:"required"`
-		Latitude  float64 `json:"latitude"`
-		Longitude float64 `json:"longitude"`
+		UserID             string  `json:"user_id" binding:"required"`
+		ShopName           string  `json:"shop_name" binding:"required"`
+		Address            string  `json:"address" binding:"required"`
+		Latitude           float64 `json:"latitude"`
+		Longitude          float64 `json:"longitude"`
+		Phone              string  `json:"phone"`
+		Email              string  `json:"email"`
+		BusinessHoursOpen  string  `json:"business_hours_open"`
+		BusinessHoursClose string  `json:"business_hours_close"`
+		Category           string  `json:"category"`
+		Description        string  `json:"description"`
 	}
 
 	if err := c.ShouldBindJSON(&input); err != nil {
@@ -84,13 +90,13 @@ func UpdateMerchantProfile(c *gin.Context) {
 		return
 	}
 
-	// Upsert merchant profile
+	// Upsert merchant profile with new fields
 	_, err := db.DB.Exec(`
-		INSERT INTO merchants (user_id, shop_name, address, latitude, longitude)
-		VALUES ($1, $2, $3, $4, $5)
+		INSERT INTO merchants (user_id, shop_name, address, latitude, longitude, phone, email, business_hours_open, business_hours_close, category, description)
+		VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
 		ON CONFLICT (user_id) DO UPDATE 
-		SET shop_name=$2, address=$3, latitude=$4, longitude=$5
-	`, input.UserID, input.ShopName, input.Address, input.Latitude, input.Longitude)
+		SET shop_name=$2, address=$3, latitude=$4, longitude=$5, phone=$6, email=$7, business_hours_open=$8, business_hours_close=$9, category=$10, description=$11
+	`, input.UserID, input.ShopName, input.Address, input.Latitude, input.Longitude, input.Phone, input.Email, input.BusinessHoursOpen, input.BusinessHoursClose, input.Category, input.Description)
 
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to update merchant profile"})

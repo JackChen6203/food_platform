@@ -108,4 +108,12 @@ func createTables() {
 	// We ignore errors here as it might fail if column exists
 	DB.Exec(`ALTER TABLE products ADD COLUMN IF NOT EXISTS merchant_id TEXT DEFAULT 'default_merchant';`)
 	DB.Exec(`ALTER TABLE products ADD COLUMN IF NOT EXISTS status TEXT DEFAULT 'AVAILABLE';`)
+
+	// New merchant profile columns
+	DB.Exec(`ALTER TABLE merchants ADD COLUMN IF NOT EXISTS phone TEXT;`)
+	DB.Exec(`ALTER TABLE merchants ADD COLUMN IF NOT EXISTS email TEXT;`)
+	DB.Exec(`ALTER TABLE merchants ADD COLUMN IF NOT EXISTS business_hours_open TEXT;`)
+	DB.Exec(`ALTER TABLE merchants ADD COLUMN IF NOT EXISTS business_hours_close TEXT;`)
+	DB.Exec(`ALTER TABLE merchants ADD COLUMN IF NOT EXISTS category TEXT;`)
+	DB.Exec(`ALTER TABLE merchants ADD COLUMN IF NOT EXISTS description TEXT;`)
 }
