@@ -13,6 +13,24 @@ func main() {
 
 	r := gin.Default()
 
+	// =========================================================================
+	// Health & Readiness Checks for Cloud Run
+	// =========================================================================
+	// Liveness: Returns 200 if server is running
+	r.GET("/health", func(c *gin.Context) {
+		c.JSON(200, gin.H{"status": "healthy"})
+	})
+
+	// Readiness: Returns 200 if DB is connected
+	r.GET("/ready", func(c *gin.Context) {
+		if err := db.DB.Ping(); err != nil {
+			c.JSON(503, gin.H{"status": "not ready", "error": err.Error()})
+			return
+		}
+		c.JSON(200, gin.H{"status": "ready"})
+	})
+	// =========================================================================
+
 	// Helper to seed data easily
 	r.POST("/seed", handlers.SeedData)
 

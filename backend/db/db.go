@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"time"
 
 	_ "github.com/lib/pq"
 )
@@ -23,6 +24,23 @@ func InitDB() {
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	// =========================================================================
+	// Connection Pool Settings for Cloud Run Scalability
+	// =========================================================================
+	// MaxOpenConns: Limit max connections to prevent overwhelming the DB
+	// when Cloud Run scales to many instances
+	DB.SetMaxOpenConns(10)
+
+	// MaxIdleConns: Keep some connections warm for faster response
+	DB.SetMaxIdleConns(5)
+
+	// ConnMaxLifetime: Prevent stale connections (important for Cloud SQL)
+	DB.SetConnMaxLifetime(5 * time.Minute)
+
+	// ConnMaxIdleTime: Close idle connections after this duration
+	DB.SetConnMaxIdleTime(1 * time.Minute)
+	// =========================================================================
 
 	err = DB.Ping()
 	if err != nil {

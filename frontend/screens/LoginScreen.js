@@ -12,7 +12,7 @@ import { COLORS, SPACING, SHADOWS, BORDER_RADIUS } from '../theme/theme';
 import { GOOGLE_CONFIG, FACEBOOK_CONFIG, IS_DEMO_MODE, isConfigured, API_URL as ENV_API_URL } from '../auth_config';
 
 import { useTranslation } from 'react-i18next';
-import { W3mButton } from '@web3modal/wagmi-react-native';
+import { useWeb3Modal } from '@web3modal/wagmi-react-native';
 import { useAccount } from 'wagmi';
 
 WebBrowser.maybeCompleteAuthSession();
@@ -27,6 +27,7 @@ export default function LoginScreen({ navigation }) {
 
     // WalletConnect Hook
     const { address, isConnected } = useAccount();
+    const { open } = useWeb3Modal();
 
     // Google Auth Hook
     const [gRequest, gResponse, gPromptAsync] = Google.useAuthRequest({
@@ -188,10 +189,14 @@ export default function LoginScreen({ navigation }) {
                 <ScrollView contentContainerStyle={styles.scrollContent}>
 
                     <View style={styles.langContainer}>
+                        <Ionicons name="globe-outline" size={16} color="rgba(255,255,255,0.8)" style={{ marginRight: 8 }} />
                         <LanguageButton lang="EN" code="en" />
-                        <LanguageButton lang="繁中" code="zh-TW" />
-                        <LanguageButton lang="简中" code="zh-CN" />
-                        <LanguageButton lang="Tiếng Việt" code="vi" />
+                        <Text style={styles.langDivider}>|</Text>
+                        <LanguageButton lang="繁" code="zh-TW" />
+                        <Text style={styles.langDivider}>|</Text>
+                        <LanguageButton lang="简" code="zh-CN" />
+                        <Text style={styles.langDivider}>|</Text>
+                        <LanguageButton lang="VI" code="vi" />
                     </View>
 
                     <View style={styles.headerArea}>
@@ -250,9 +255,14 @@ export default function LoginScreen({ navigation }) {
                                 />
 
                                 {/* WalletConnect Button */}
-                                <View style={{ marginTop: 10 }}>
-                                    <W3mButton balance="hide" connectStyle={styles.socialBtn} />
-                                </View>
+                                <SocialButton
+                                    provider="wallet"
+                                    color="#667eea"
+                                    icon="wallet"
+                                    label={t('connect_wallet')}
+                                    fontAwesome={false}
+                                    onPress={() => open()}
+                                />
 
                                 {/* Register Button */}
                                 <TouchableOpacity
@@ -340,24 +350,31 @@ const styles = StyleSheet.create({
 
     langContainer: {
         flexDirection: 'row',
+        alignItems: 'center',
         justifyContent: 'center',
-        marginTop: 40,
-        marginBottom: 20
+        marginTop: 50,
+        marginBottom: 15,
+        paddingHorizontal: 16,
+        paddingVertical: 8,
+        backgroundColor: 'rgba(0,0,0,0.4)',
+        borderRadius: 20,
+        alignSelf: 'center',
     },
     langBtn: {
-        paddingHorizontal: 10,
-        paddingVertical: 5,
-        backgroundColor: 'rgba(0,0,0,0.3)',
-        marginHorizontal: 5,
-        borderRadius: 15
+        paddingHorizontal: 8,
+        paddingVertical: 4,
     },
     langText: {
-        color: 'rgba(255,255,255,0.7)',
+        color: 'rgba(255,255,255,0.6)',
         fontWeight: '600',
-        fontSize: 12
+        fontSize: 13
     },
     langTextActive: {
         color: '#FFF',
         fontWeight: 'bold'
+    },
+    langDivider: {
+        color: 'rgba(255,255,255,0.3)',
+        fontSize: 12,
     }
 });
