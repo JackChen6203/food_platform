@@ -25,6 +25,10 @@ func main() {
 	r.POST("/login", handlers.Login)
 	r.POST("/merchant/setup", handlers.UpdateMerchantProfile)
 
+	// SMS Registration Routes
+	r.POST("/register/send-sms", handlers.SendSMSCode)
+	r.POST("/register/verify-sms", handlers.VerifySMSCode)
+
 	// =========================================================================
 	// NEW ROUTES: Social Features
 	// =========================================================================
@@ -54,4 +58,5 @@ func main() {
 	}
 	r.Run(":" + port)
 }
+
 // CI/CD test

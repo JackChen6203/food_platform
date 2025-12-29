@@ -83,7 +83,21 @@ const resources = {
             // SearchScreen
             "search": "Search",
             "search_placeholder": "Search shops or food...",
-            "no_results": "No Results Found"
+            "no_results": "No Results Found",
+            // Registration
+            "register": "Register",
+            "phone_number": "Phone Number",
+            "enter_phone_subtitle": "Enter your phone number to receive a verification code",
+            "send_code": "Send Code",
+            "enter_code": "Enter Verification Code",
+            "verify_and_register": "Verify & Register",
+            "resend_code": "Resend Code",
+            "change_phone": "Change phone number",
+            "code_sent": "Verification code sent!",
+            "invalid_code": "Invalid verification code",
+            "invalid_phone": "Please enter a valid phone number",
+            "send_code_failed": "Failed to send code",
+            "registration_success": "Registration successful!"
         }
     },
     'zh-TW': {
@@ -160,7 +174,21 @@ const resources = {
             "no_notifications_desc": "您已看完所有通知！稍後再來查看。",
             "search": "搜尋",
             "search_placeholder": "搜尋店家或美食...",
-            "no_results": "找不到結果"
+            "no_results": "找不到結果",
+            // Registration
+            "register": "註冊",
+            "phone_number": "手機號碼",
+            "enter_phone_subtitle": "輸入您的手機號碼以接收驗證碼",
+            "send_code": "發送驗證碼",
+            "enter_code": "輸入驗證碼",
+            "verify_and_register": "驗證並註冊",
+            "resend_code": "重新發送",
+            "change_phone": "更換手機號碼",
+            "code_sent": "驗證碼已發送！",
+            "invalid_code": "驗證碼錯誤",
+            "invalid_phone": "請輸入有效的手機號碼",
+            "send_code_failed": "發送驗證碼失敗",
+            "registration_success": "註冊成功！"
         }
     },
     'zh-CN': {
@@ -228,7 +256,21 @@ const resources = {
             "cat_bakery": "烘焙坊",
             "cat_grocery": "杂货店",
             "cat_cafe": "咖啡厅",
-            "cat_other": "其他"
+            "cat_other": "其他",
+            // Registration
+            "register": "注册",
+            "phone_number": "手机号码",
+            "enter_phone_subtitle": "输入您的手机号码以接收验证码",
+            "send_code": "发送验证码",
+            "enter_code": "输入验证码",
+            "verify_and_register": "验证并注册",
+            "resend_code": "重新发送",
+            "change_phone": "更换手机号码",
+            "code_sent": "验证码已发送！",
+            "invalid_code": "验证码错误",
+            "invalid_phone": "请输入有效的手机号码",
+            "send_code_failed": "发送验证码失败",
+            "registration_success": "注册成功！"
         }
     },
     vi: {
@@ -296,7 +338,21 @@ const resources = {
             "cat_bakery": "Tiệm bánh",
             "cat_grocery": "Cửa hàng tạp hóa",
             "cat_cafe": "Quán cà phê",
-            "cat_other": "Khác"
+            "cat_other": "Khác",
+            // Registration
+            "register": "Đăng ký",
+            "phone_number": "Số điện thoại",
+            "enter_phone_subtitle": "Nhập số điện thoại để nhận mã xác minh",
+            "send_code": "Gửi mã",
+            "enter_code": "Nhập mã xác minh",
+            "verify_and_register": "Xác minh & Đăng ký",
+            "resend_code": "Gửi lại mã",
+            "change_phone": "Đổi số điện thoại",
+            "code_sent": "Đã gửi mã xác minh!",
+            "invalid_code": "Mã xác minh không hợp lệ",
+            "invalid_phone": "Vui lòng nhập số điện thoại hợp lệ",
+            "send_code_failed": "Gửi mã thất bại",
+            "registration_success": "Đăng ký thành công!"
         }
     }
 };

@@ -231,28 +231,14 @@ export default function LoginScreen({ navigation }) {
                                     onPress={() => handleLoginPress('google')}
                                 />
 
-                                <View style={styles.row}>
-                                    <View style={{ flex: 1, marginRight: 8 }}>
-                                        <SocialButton
-                                            provider="facebook"
-                                            color={COLORS.facebook}
-                                            icon="facebook"
-                                            label={t('continue_facebook')}
-                                            fontAwesome={true}
-                                            onPress={() => handleLoginPress('facebook')}
-                                        />
-                                    </View>
-                                    <View style={{ flex: 1, marginLeft: 8 }}>
-                                        <SocialButton
-                                            provider="x"
-                                            color={COLORS.x}
-                                            icon="twitter"
-                                            label={t('continue_x')}
-                                            fontAwesome={true}
-                                            onPress={() => simulateLogin('x')}
-                                        />
-                                    </View>
-                                </View>
+                                <SocialButton
+                                    provider="facebook"
+                                    color={COLORS.facebook}
+                                    icon="facebook"
+                                    label={t('continue_facebook')}
+                                    fontAwesome={true}
+                                    onPress={() => handleLoginPress('facebook')}
+                                />
 
                                 <SocialButton
                                     provider="line"
@@ -268,8 +254,19 @@ export default function LoginScreen({ navigation }) {
                                     <W3mButton balance="hide" connectStyle={styles.socialBtn} />
                                 </View>
 
+                                {/* Register Button */}
+                                <TouchableOpacity
+                                    style={[styles.socialBtn, styles.registerBtn]}
+                                    onPress={() => navigation.navigate('Register')}
+                                >
+                                    <View style={styles.iconContainer}>
+                                        <Ionicons name="person-add" size={20} color={COLORS.primary} />
+                                    </View>
+                                    <Text style={styles.registerBtnText}>{t('register')}</Text>
+                                </TouchableOpacity>
+
                                 {/* Developer Shortcut */}
-                                <TouchableOpacity onPress={() => handleBackendLogin('google', 'merchant_user_id')} style={{ marginTop: 20 }}>
+                                <TouchableOpacity onPress={() => handleBackendLogin('google', 'merchant_user_id')} style={{ marginTop: 10 }}>
                                     <Text style={styles.debugText}>{t('dev_quick_login')}</Text>
                                 </TouchableOpacity>
                             </>
@@ -312,9 +309,16 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     iconContainer: { marginRight: SPACING.s },
-    socialBtnText: { color: '#FFF', fontWeight: 'bold', fontSize: 15 },
+    socialBtnText: { color: '#FFF', fontWeight: 'bold', fontSize: 15, flexShrink: 1 },
 
-    row: { flexDirection: 'row' },
+    registerBtn: {
+        backgroundColor: 'transparent',
+        borderWidth: 2,
+        borderColor: COLORS.primary,
+        marginTop: SPACING.m,
+    },
+    registerBtnText: { color: COLORS.primary, fontWeight: 'bold', fontSize: 15 },
+
     debugText: { textAlign: 'center', color: COLORS.textSecondary, fontSize: 12, opacity: 0.6 },
 
     roleToggleContainer: {
